@@ -6,25 +6,25 @@ NN = NeuralNetwork()
 NN.train()
 
 NN.forward_propagation([1, 0, 0, 0, 0, 0, 0, 0])
-print(np.around(NN.outputs))
+print(np.around(NN.outputs, decimals=0))
 
 NN.forward_propagation([0, 1, 0, 0, 0, 0, 0, 0])
-print(np.around(NN.outputs, decimals=3))
+print(np.around(NN.outputs, decimals=0))
 
 NN.forward_propagation([0, 0, 1, 0, 0, 0, 0, 0])
-print(np.around(NN.outputs, decimals=3))
+print(np.around(NN.outputs, decimals=0))
 
 NN.forward_propagation([0, 0, 0, 1, 0, 0, 0, 0])
-print(np.around(NN.outputs, decimals=3))
+print(np.around(NN.outputs, decimals=0))
 
 NN.forward_propagation([0, 0, 0, 0, 1, 0, 0, 0])
-print(np.around(NN.outputs, decimals=3))
+print(np.around(NN.outputs, decimals=0))
 
 NN.forward_propagation([0, 0, 0, 0, 0, 1, 0, 0])
-print(np.around(NN.outputs, decimals=3))
+print(np.around(NN.outputs, decimals=0))
 
 NN.forward_propagation([0, 0, 0, 0, 0, 0, 1, 0])
-print(np.around(NN.outputs, decimals=3))
+print(np.around(NN.outputs, decimals=0))
 
 NN.forward_propagation([0, 0, 0, 0, 0, 0, 0, 1])
-print(np.around(NN.outputs, decimals=3))
+print(np.around(NN.outputs, decimals=0))

@@ -6,18 +6,20 @@ import matplotlib.pyplot as plt
 
 
 class NeuralNetwork:
-    train_data = [[1, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 1, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 1, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 1, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 1, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 1, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 1, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 1]]
+    train_data = [
+        [1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1],
+    ]
 
     learning_rate = 15
     weight_decay = 0
-    training_iterations = 50000
+    training_iterations = 5000
 
     def __init__(self):
         self.network = []
@@ -49,12 +51,21 @@ class NeuralNetwork:
             if layer - 1 < 0:
                 w_d = np.reshape(gradient, [3, 1]) * input
             else:
-                w_d = np.reshape(gradient, [8, 1]) * np.reshape(self.network[layer - 1].output, [1, 3])
+                w_d = np.reshape(gradient, [8, 1]) * np.reshape(
+                    self.network[layer - 1].output, [1, 3]
+                )
 
             # Update weights and biases
-            self.network[layer].update_weights(self.learning_rate * (
-                        (1 / self.network[layer].n_inputs) * w_d + self.weight_decay * self.network[layer].weights))
-            self.network[layer].update_biases(self.learning_rate * (1 / self.network[layer].n_inputs) * gradient)
+            self.network[layer].update_weights(
+                self.learning_rate
+                * (
+                    (1 / self.network[layer].n_inputs) * w_d
+                    + self.weight_decay * self.network[layer].weights
+                )
+            )
+            self.network[layer].update_biases(
+                self.learning_rate * (1 / self.network[layer].n_inputs) * gradient
+            )
 
             # Backpropagate the errors for next iteration
             errors = np.dot(self.network[layer].weights.T, errors)
@@ -83,16 +94,20 @@ class NeuralNetwork:
 
     def cost(self, input) -> float:
         self.forward_propagation(input)
-        return float(np.sum(1 / 2 * np.square(self.network[len(self.network) - 1].compute_errors(input))))
+        return float(
+            np.sum(
+                1
+                / 2
+                * np.square(self.network[len(self.network) - 1].compute_errors(input))
+            )
+        )
 
-    @staticmethod
     def plot_cost_per_example(self, cost_list: List[List[float]]) -> None:
         # Create and show cost graph
         for j in range(len(self.train_data)):
             plt.plot(range(len(cost_list[j])), cost_list[j])
         plt.show()
 
-    @staticmethod
     def plot_average_cost(self, cost_list: List[float]) -> None:
         plt.plot(range(len(cost_list)), cost_list)
         plt.show()
